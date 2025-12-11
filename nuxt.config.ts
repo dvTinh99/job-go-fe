@@ -23,18 +23,5 @@ export default defineNuxtConfig({
      * @default "@/components/ui"
      */
     componentDir: '@/components/ui'
-  },
-  nitro: {
-    debug: true,
-    routeRules: {
-      '/proxy/**': {
-        proxy: {
-          to: 'http://localhost:8009/api/**'
-        }
-      }
-    }
   }
-
-
-
 })

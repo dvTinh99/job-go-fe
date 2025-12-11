@@ -1,23 +1,19 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 
-const apiUrl = import.meta.env.VITE_GOOGLE_LOGIN_URL
-const useAuth = useAuthStore()
 const email = ref<string>('')
 const password = ref<string>('')
-const router = useRouter()
+const fullname = ref<string>('')
+const confirmPassword = ref<string>('')
 
-function handleGoogleLogin() {
-  window.location = apiUrl
-}
-
-async function onLogin() {
-  const rs = await useApi('/proxy/login', {
+async function onSignUp() {
+  const rs = await useApi('/api/register', {
     method: 'POST',
     body: {
+      name: fullname,
       email: email.value,
       password: password.value,
+      password_confirmation: confirmPassword.value,
     },
   })
   console.log('rs', rs)
@@ -36,6 +32,7 @@ async function onLogin() {
       <form class="space-y-6">
         <div>
           <input
+            v-model="fullname"
             class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-800 outline-none"
             placeholder="Full Name"
           />
@@ -43,6 +40,7 @@ async function onLogin() {
 
         <div>
           <input
+            v-model="email"
             type="email"
             class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-800 outline-none"
             placeholder="Email address"
@@ -51,13 +49,23 @@ async function onLogin() {
 
         <div>
           <input
+            v-model="password"
             type="password"
             class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-800 outline-none"
             placeholder="Password"
           />
         </div>
 
-        <button class="w-full py-3 bg-black text-white rounded-xl font-semibold hover:opacity-90">
+        <div>
+          <input
+            v-model="confirmPassword"
+            type="password"
+            class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-800 outline-none"
+            placeholder="Confirm SPassword"
+          />
+        </div>
+
+        <button class="w-full py-3 bg-black text-white rounded-xl font-semibold hover:opacity-90" @click="onSignUp" type="button">
           Create Account
         </button>
 

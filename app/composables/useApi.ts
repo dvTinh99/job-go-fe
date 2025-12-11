@@ -4,6 +4,7 @@ export const useApi: typeof useFetch = (request, opts?) => {
   return useFetch(request, {
     headers: {
       Authorization: `Bearer ${token.value}`,
+      Accept: "application/json"
     },
     ...opts,
   })
