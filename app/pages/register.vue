@@ -5,17 +5,19 @@ const email = ref<string>('')
 const password = ref<string>('')
 const fullname = ref<string>('')
 const confirmPassword = ref<string>('')
+const authStore = useAuthStore()
 
 async function onSignUp() {
-  const rs = await useApi('/api/register', {
-    method: 'POST',
-    body: {
-      name: fullname,
-      email: email.value,
-      password: password.value,
-      password_confirmation: confirmPassword.value,
-    },
-  })
+  const rs = authStore.register(fullname.value, email.value, password.value, confirmPassword.value)
+  // const rs = await useApi('/api/register', {
+  //   method: 'POST',
+  //   body: {
+  //     name: fullname,
+  //     email: email.value,
+  //     password: password.value,
+  //     password_confirmation: confirmPassword.value,
+  //   },
+  // })
   console.log('rs', rs)
 
   //   if (rs.status) {

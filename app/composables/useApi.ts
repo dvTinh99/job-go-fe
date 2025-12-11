@@ -1,22 +1,34 @@
-export const useApi: typeof useFetch = (request, opts?) => {
+// composables/useApi.ts
+export function useApi<T>(
+  request: Parameters<typeof useFetch<T>>[0],
+  opts: Parameters<typeof useFetch<T>>[1] = {}
+) {
   const token = useCookie('_token')
 
-  return useFetch(request, {
-    headers: {
-      Authorization: `Bearer ${token.value}`,
-      Accept: "application/json"
-    },
+  return useFetch<T>(request, {
     ...opts,
+    headers: {
+      ...(opts?.headers || {}),
+      Authorization: token.value ? `Bearer ${token.value}` : "",
+      Accept: "application/json",
+    },
   })
 }
 
-export const useLazyApi: typeof useLazyFetch = (request, opts?) => {
+
+export function useLazyApi<T>(
+  request: Parameters<typeof useLazyFetch<T>>[0],
+  opts: Parameters<typeof useLazyFetch<T>>[1] = {}
+) {
   const token = useCookie('_token')
 
-  return useLazyFetch(request, {
-    headers: {
-      Authorization: `Bearer ${token.value}`,
-    },
+  return useLazyFetch<T>(request, {
     ...opts,
+    headers: {
+      ...(opts?.headers || {}),
+      Authorization: token.value ? `Bearer ${token.value}` : "",
+      Accept: "application/json",
+    },
   })
 }
+
