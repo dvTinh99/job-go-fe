@@ -9,7 +9,7 @@ import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
     <main class="w-full h-screen">
       <SidebarTrigger />
       <ClientOnly>
-          <nuxt-page />
+        <nuxt-page />
       </ClientOnly>
     </main>
   </SidebarProvider>

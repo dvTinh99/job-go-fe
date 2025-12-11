@@ -5,8 +5,8 @@ export function useFetchConfig() {
 
   const baseConfig: UseFetchOptions<any> = {
     headers: {
-      Authorization: `Bearer ${token.value}`
-    }
+      Authorization: `Bearer ${token.value}`,
+    },
   }
 
   const merge = <T = any>(config?: UseFetchOptions<T>): UseFetchOptions<T> => {
@@ -14,6 +14,6 @@ export function useFetchConfig() {
   }
 
   return {
-    merge
+    merge,
   }
 }

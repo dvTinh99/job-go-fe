@@ -2,7 +2,6 @@
 import { Label } from '@/components/ui/label'
 import SelectOption from '@/components/SelectOption.vue'
 import { Separator } from '@/components/ui/separator'
-
 </script>
 <template>
   <div class="">

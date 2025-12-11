@@ -32,7 +32,7 @@ const openCalendar = () => (showCalendar.value = !showCalendar.value)
     <div class="">
       <!-- Deadline -->
       <Label for="title">Deadline</Label>
-      <Button @click="openCalendar" class="w-[250px]">open</Button>
+      <Button class="w-[250px]" @click="openCalendar">open</Button>
       <Calendar
         v-if="showCalendar"
         v-model="value"

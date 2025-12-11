@@ -2,7 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/icon', 'shadcn-nuxt', '@nuxtjs/tailwindcss', '@vueuse/nuxt'],
+  modules: [
+    '@nuxt/eslint',
+    '@nuxt/icon',
+    'shadcn-nuxt',
+    '@nuxtjs/tailwindcss',
+    '@vueuse/nuxt',
+    '@pinia/nuxt',
+  ],
   shadcn: {
     /**
      * Prefix for all the imported component.
@@ -16,6 +23,18 @@ export default defineNuxtConfig({
      * @default "@/components/ui"
      */
     componentDir: '@/components/ui'
+  },
+  nitro: {
+    debug: true,
+    routeRules: {
+      '/proxy/**': {
+        proxy: {
+          to: 'http://localhost:8009/api/**'
+        }
+      }
+    }
   }
+
+
 
 })

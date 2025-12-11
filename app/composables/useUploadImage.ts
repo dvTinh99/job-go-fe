@@ -12,7 +12,7 @@ export function useUploadImage(options?: UseFileDialogOptions) {
 
     const option: UseFileDialogOptions = defu(options, {
       multiple: false,
-      accept: 'image/*'
+      accept: 'image/*',
     })
 
     const { open, reset, onChange } = useFileDialog(option)
@@ -26,7 +26,7 @@ export function useUploadImage(options?: UseFileDialogOptions) {
         const blob = await heic2jpg({
           blob: file,
           toType: 'image/jpeg',
-          quality: 1
+          quality: 1,
         })
         // ranem heic or heif to upercase of each file to jpg
         const imageName = file.name.split('.')
@@ -34,12 +34,13 @@ export function useUploadImage(options?: UseFileDialogOptions) {
         const name = imageName.join('.')
         const image = new File(Array.isArray(blob) ? blob : [blob], name, { type: 'image/jpeg' })
         formData.append('image', image)
+      } else {
+        formData.append('image', file)
       }
-      else { formData.append('image', file) }
 
       const { data } = await useApi<ApiResponse<string[]>>('/proxy/upload-image', {
         method: 'POST',
-        body: formData
+        body: formData,
       })
       return data.value!.data[0]
     }
@@ -56,8 +57,7 @@ export function useUploadImage(options?: UseFileDialogOptions) {
 
         const output: string | string[] = option.multiple ? images : images[0]
 
-        if (output)
-          callback(output)
+        if (output) callback(output)
       }
       reset()
       toggleUpLoading()
