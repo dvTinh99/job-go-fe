@@ -9,7 +9,7 @@ type TAuth = {
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    user: null,
+    user: {},
     access_token: '',
     refresh_token: '',
     isLoggedIn: false,
@@ -22,21 +22,28 @@ export const useAuthStore = defineStore('auth', {
   actions: {
     async loginWithEmail(email: string, password: string) {
       // const rs = await authApi.loginWithEmail(email, password)
-      // this.login(rs.data.access_token, rs.data.refresh_token)
-      // return rs
+      const { data, error } = await useApi<ApiResponse<TAuth>>('/api/login', {
+        method: 'POST',
+        body: {
+          email,
+          password,
+        },
+      })
+      this.user = data.value.data.user
+      this.access_token = data.value.data.access_token
+      this.refresh_token = data.value.data.refresh_token
+      this.isLoggedIn = true
+
+      return data.value.status
     },
     async login(access_token: string, refresh_token: string) {
-      // this.user = user
       this.access_token = access_token
       this.refresh_token = refresh_token
       this.isLoggedIn = true
-
-      // có thể config header mặc định
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
     },
     async register(name: string, email: string, password: string, password_confirmation: string) {
       // this.user = user
-      const error = await useApi<ApiResponse<TAuth>>('/api/register', {
+      const { data, error } = await useApi<ApiResponse<TAuth>>('/api/register', {
         method: 'POST',
         body: {
           name,
@@ -47,12 +54,9 @@ export const useAuthStore = defineStore('auth', {
       })
       console.log('error register', error);
       
-      // this.access_token = data.value.
-      // this.refresh_token = refresh_token
-      // this.isLoggedIn = true
-
-      // có thể config header mặc định
-      // axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`
+      this.access_token = data.value.data.access_token
+      this.refresh_token = data.value.data.refresh_token
+      this.isLoggedIn = true
     },
     async logout() {
       // Optional: gọi API logout

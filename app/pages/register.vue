@@ -23,7 +23,7 @@ async function onSignUp() {
   //   if (rs.status) {
   //     return router.push({ name: 'admin.add-job' })
   //   }
-  console.log('rs.data?.status', rs.status)
+  // console.log('rs.data?.status', rs.status)
 }
 </script>
 <template>

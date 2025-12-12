@@ -13,19 +13,12 @@ function handleGoogleLogin() {
 }
 
 async function onLogin() {
-  const rs = await useApi('/proxy/login', {
-    method: 'POST',
-    body: {
-      email: email.value,
-      password: password.value,
-    },
-  })
-  console.log('rs', rs)
-
-  //   if (rs.status) {
-  //     return router.push({ name: 'admin.add-job' })
-  //   }
-  console.log('rs.data?.status', rs.status)
+  const rs = await useAuth.loginWithEmail(email.value, password.value)
+  if (rs) {
+    router.push({
+      name: "admin"
+    })
+  }
 }
 </script>
 <template>

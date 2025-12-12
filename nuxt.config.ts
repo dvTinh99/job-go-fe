@@ -1,3 +1,4 @@
+import 'node:process'
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
@@ -23,5 +24,15 @@ export default defineNuxtConfig({
      * @default "@/components/ui"
      */
     componentDir: '@/components/ui'
+  },
+  runtimeConfig: {
+    // Private keys are only available on the server
+    apiSecret: process.env.NUXT_PROXY_TARGET,
+
+    // Public keys that are exposed to the client
+    public: {
+      apiBase: process.env.NUXT_PROXY_TARGET || '',
+    },
   }
+
 })

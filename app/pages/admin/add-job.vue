@@ -2,8 +2,10 @@
 import { Label } from '@/components/ui/label'
 import GenaralInformation from '@/components/TextEditor/GenaralInformation.vue'
 import BasicInformation from '@/components/TextEditor/BasicInformation.vue'
-
 import '@vueup/vue-quill/dist/vue-quill.snow.css'
+
+const authStore = useAuthStore()
+console.log('authStore', authStore.$state);
 
 definePageMeta({
   layout: 'admin',
