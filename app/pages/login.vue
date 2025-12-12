@@ -7,6 +7,10 @@ const useAuth = useAuthStore()
 const email = ref<string>('')
 const password = ref<string>('')
 const router = useRouter()
+const config = useRuntimeConfig()
+
+console.log('config ne', config);
+
 
 function handleGoogleLogin() {
   window.location = apiUrl
