@@ -33,6 +33,9 @@ export default defineNuxtConfig({
     public: {
       apiBase: process.env.NUXT_PROXY_TARGET || '',
     },
+  },
+  nitro: {
+    preset: 'netlify'
   }
 
 })
