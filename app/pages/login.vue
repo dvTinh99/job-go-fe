@@ -1,28 +1,16 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
 const apiUrl = import.meta.env.VITE_GOOGLE_LOGIN_URL
-const useAuth = useAuthStore()
+const authStore = useAuthStore()
 const email = ref<string>('')
 const password = ref<string>('')
-const router = useRouter()
-const config = useRuntimeConfig()
-
-console.log('config ne', config);
-
 
 function handleGoogleLogin() {
   window.location = apiUrl
 }
 
 async function onLogin() {
-  const rs = await useAuth.loginWithEmail(email.value, password.value)
-  if (rs) {
-    router.push({
-      name: "admin"
-    })
-  }
+  await authStore.loginWithEmail(email.value, password.value)
 }
 </script>
 <template>

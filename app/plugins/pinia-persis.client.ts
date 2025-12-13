@@ -1,7 +1,6 @@
 import { defineNuxtPlugin } from '#app'
 import type { SubscriptionCallbackMutation, StateTree, Pinia } from 'pinia'
 
-
 export default defineNuxtPlugin((nuxtApp) => {
   const pinia = nuxtApp.$pinia as Pinia
 
@@ -10,7 +9,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const key = `pinia_${storeId}`
 
     // Lấy danh sách fields cần persist (nếu có)
-    const persistFields: string[] | undefined = options?.persist || [] 
+    const persistFields: string[] | undefined = options?.persist || []
 
     // Load dữ liệu từ localStorage
     const saved = localStorage.getItem(key)
@@ -20,7 +19,7 @@ export default defineNuxtPlugin((nuxtApp) => {
       if (persistFields) {
         // Chỉ patch các field cần persist
         const patchedData = Object.fromEntries(
-          Object.entries(data).filter(([field]) => persistFields.includes(field))
+          Object.entries(data).filter(([field]) => persistFields.includes(field)),
         )
         store.$patch(patchedData)
       } else {
@@ -40,8 +39,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
         localStorage.setItem(key, JSON.stringify(dataToSave))
       },
-      { detached: true } // tránh double save khi HMR
+      { detached: true }, // tránh double save khi HMR
     )
   })
 })
-

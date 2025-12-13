@@ -8,22 +8,7 @@ const confirmPassword = ref<string>('')
 const authStore = useAuthStore()
 
 async function onSignUp() {
-  const rs = authStore.register(fullname.value, email.value, password.value, confirmPassword.value)
-  // const rs = await useApi('/api/register', {
-  //   method: 'POST',
-  //   body: {
-  //     name: fullname,
-  //     email: email.value,
-  //     password: password.value,
-  //     password_confirmation: confirmPassword.value,
-  //   },
-  // })
-  console.log('rs', rs)
-
-  //   if (rs.status) {
-  //     return router.push({ name: 'admin.add-job' })
-  //   }
-  // console.log('rs.data?.status', rs.status)
+  await authStore.register(fullname.value, email.value, password.value, confirmPassword.value)
 }
 </script>
 <template>
@@ -67,7 +52,11 @@ async function onSignUp() {
           />
         </div>
 
-        <button class="w-full py-3 bg-black text-white rounded-xl font-semibold hover:opacity-90" @click="onSignUp" type="button">
+        <button
+          class="w-full py-3 bg-black text-white rounded-xl font-semibold hover:opacity-90"
+          @click="onSignUp"
+          type="button"
+        >
           Create Account
         </button>
 
