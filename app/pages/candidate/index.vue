@@ -84,6 +84,8 @@
           </div>
         </section>
 
+        <upload-resume />
+
         <!-- Mục Liên hệ / Portfolio -->
         <section class="text-center">
           <a
