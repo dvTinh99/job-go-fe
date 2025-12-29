@@ -17,7 +17,7 @@ export function useUploadFile() {
    */
   const { open, onChange, reset } = useFileDialog({
     accept: '.pdf,.doc,.docx',
-    multiple: false
+    multiple: false,
   })
 
   onChange((files) => {
@@ -57,7 +57,7 @@ export function useUploadFile() {
         url: string
         fields: Record<string, string>
       }>('/api/upload/generate-url', {
-        method: 'GET'
+        method: 'GET',
       })
 
       /**
@@ -130,6 +130,6 @@ export function useUploadFile() {
     // actions
     openFileDialog: open,
     upload,
-    reset: resetAll
+    reset: resetAll,
   }
 }

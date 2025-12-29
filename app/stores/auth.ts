@@ -74,7 +74,7 @@ export const useAuthStore = defineStore('auth', {
         },
       })
 
-      const {data, success, message} = result.data.value
+      const { data, success, message } = result.data.value
       this.user = data.user
       this.access_token = data.access_token
       this.refresh_token = data.refresh_token
